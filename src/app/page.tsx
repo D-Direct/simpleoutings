@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Globe, Layout, Zap } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LandingPage() {
   return (
@@ -31,25 +32,44 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full py-20 md:py-32 lg:py-48 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-100 via-white to-white">
-          <div className="container px-4 md:px-6 mx-auto text-center">
-            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-stone-100 text-stone-600 mb-8 border border-stone-200">
-              <span className="flex h-2 w-2 rounded-full bg-stone-400 mr-2" />
-              Stop giving 20% of your hard-earned money to Airbnb. Take control of your bookings.
-            </div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/tight max-w-4xl mx-auto mb-8">
-              Beautiful Websites for <span className="text-stone-500"><div>Sri Lankan Homestays</div></span>
-            </h1>
-            <p className="mx-auto max-w-[700px] text-stone-500 md:text-xl lg:text-2xl font-light mb-12">
-              Launch your property&apos;s professional website in minutes. Capture 100% of the booking value without the high commissions.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-stone-900 text-white hover:bg-stone-800 rounded-full h-14 px-10 text-lg shadow-xl" asChild>
-                <Link href="/auth/signup">Start Your Free Website</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg border-stone-200 hover:bg-stone-50">
-                View Sample Site
-              </Button>
+        <section className="w-full py-12 md:py-20 lg:py-24 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-100 via-white to-white">
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Column - Text Content */}
+              <div className="text-center lg:text-left">
+                <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-stone-100 text-stone-600 mb-6 border border-stone-200">
+                  <span className="flex h-2 w-2 rounded-full bg-stone-400 mr-2" />
+                  Stop giving 20% of your hard-earned money to Airbnb. Take control of your bookings.
+                </div>
+                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-6xl/tight mb-6">
+                  Beautiful Websites for <span className="text-stone-500">Sri Lankan Homestays</span>
+                </h1>
+                <p className="max-w-[600px] text-stone-500 text-lg md:text-xl font-light mb-8 mx-auto lg:mx-0">
+                  Launch your property&apos;s professional website in minutes. Capture 100% of the booking value without the high commissions.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Button size="lg" className="bg-stone-900 text-white hover:bg-stone-800 rounded-full h-14 px-10 text-lg shadow-xl" asChild>
+                    <Link href="/auth/signup">Start Your Free Website</Link>
+                  </Button>
+                  <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg border-stone-200 hover:bg-stone-50">
+                    View Sample Site
+                  </Button>
+                </div>
+              </div>
+
+              {/* Right Column - Hero Image */}
+              <div className="relative lg:order-last">
+                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/uploads/Simpleoutings-Hero.jpg"
+                    alt="Beautiful Sri Lankan homestay property"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
