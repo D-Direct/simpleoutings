@@ -38,7 +38,7 @@ export default function LandingPage() {
               Stop giving 20% of your hard-earned money to Airbnb. Take control of your bookings.
             </div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/tight max-w-4xl mx-auto mb-8">
-              Beautiful Websites for <span className="text-stone-500">Sri Lankan Homestays</span>
+              Beautiful Websites for <span className="text-stone-500"><div>Sri Lankan Homestays</div></span>
             </h1>
             <p className="mx-auto max-w-[700px] text-stone-500 md:text-xl lg:text-2xl font-light mb-12">
               Launch your property&apos;s professional website in minutes. Capture 100% of the booking value without the high commissions.
