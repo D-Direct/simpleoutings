@@ -103,7 +103,7 @@ export default async function TenantPage({
                 © {new Date().getFullYear()} {property.name}.
               </p>
               <p className="text-stone-300 text-[10px] uppercase tracking-widest mt-2">
-                Built with StayLaunch
+                Built with SimpleOutings
               </p>
             </div>
           </div>
