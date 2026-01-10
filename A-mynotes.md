@@ -1,0 +1,21 @@
+* Setup a template for tenant to create their own website
+    Contents
+        - Hero section
+        - About section
+        - Contact section
+        - Booking section
+        - Gallery section
+        - Testimonials section
+        - Footer section   
+        - Contact form
+        - Booking form
+        - Payment form
+        - Payment success page
+        - Payment failure page
+        - Payment history page
+        - Payment history table
+        - Admin page for tenant to manage their website
+            - allow adding images, testimonials, and other content
+            - allow editing the website
+            - allow deleting the website
+            - allow adding new website  
