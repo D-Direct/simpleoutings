@@ -1,10 +1,61 @@
-import { pgTable, text, timestamp, doublePrecision, integer, jsonb, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, doublePrecision, integer, jsonb, uniqueIndex, boolean } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
+// Superadmin users (separate from tenant owners)
+export const superadmins = pgTable("Superadmin", {
+    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+    email: text("email").notNull().unique(),
+    name: text("name"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// Regular tenant owner users
 export const users = pgTable("User", {
     id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
     email: text("email").notNull().unique(),
+    name: text("name"),
+    phone: text("phone"),
+    // Subscription and status
+    subscriptionStatus: text("subscriptionStatus").default("active").notNull(), // active, suspended, cancelled
+    subscriptionPlanId: text("subscriptionPlanId").references(() => subscriptionPlans.id),
+    subscriptionStartDate: timestamp("subscriptionStartDate"),
+    subscriptionEndDate: timestamp("subscriptionEndDate"),
+    nextPaymentDue: timestamp("nextPaymentDue"),
+    // Notes from superadmin
+    notes: text("notes"),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+// Subscription plans (monthly pricing tiers)
+export const subscriptionPlans = pgTable("SubscriptionPlan", {
+    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+    name: text("name").notNull(), // e.g., "Basic", "Pro", "Enterprise"
+    description: text("description"),
+    priceMonthly: doublePrecision("priceMonthly").notNull(),
+    currency: text("currency").default("LKR").notNull(),
+    features: jsonb("features"), // Array of feature strings
+    maxProperties: integer("maxProperties").default(1).notNull(),
+    isActive: boolean("isActive").default(true).notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+// Payment records
+export const payments = pgTable("Payment", {
+    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+    amount: doublePrecision("amount").notNull(),
+    currency: text("currency").default("LKR").notNull(),
+    status: text("status").default("pending").notNull(), // pending, completed, failed, refunded
+    paymentMethod: text("paymentMethod"), // bank_transfer, card, cash, etc.
+    paymentDate: timestamp("paymentDate"),
+    periodStart: timestamp("periodStart").notNull(),
+    periodEnd: timestamp("periodEnd").notNull(),
+    referenceNumber: text("referenceNumber"),
+    notes: text("notes"),
+    recordedBy: text("recordedBy").references(() => superadmins.id), // Which admin recorded it
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export const properties = pgTable("Property", {
@@ -102,8 +153,32 @@ export const inquiries = pgTable("Inquiry", {
 });
 
 // Relations
-export const usersRelations = relations(users, ({ many }) => ({
+export const superadminsRelations = relations(superadmins, ({ many }) => ({
+    paymentsRecorded: many(payments),
+}));
+
+export const subscriptionPlansRelations = relations(subscriptionPlans, ({ many }) => ({
+    users: many(users),
+}));
+
+export const usersRelations = relations(users, ({ one, many }) => ({
     properties: many(properties),
+    payments: many(payments),
+    subscriptionPlan: one(subscriptionPlans, {
+        fields: [users.subscriptionPlanId],
+        references: [subscriptionPlans.id],
+    }),
+}));
+
+export const paymentsRelations = relations(payments, ({ one }) => ({
+    user: one(users, {
+        fields: [payments.userId],
+        references: [users.id],
+    }),
+    recordedByAdmin: one(superadmins, {
+        fields: [payments.recordedBy],
+        references: [superadmins.id],
+    }),
 }));
 
 export const propertiesRelations = relations(properties, ({ one, many }) => ({
