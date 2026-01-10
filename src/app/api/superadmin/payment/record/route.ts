@@ -15,19 +15,18 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const { userId, adminId, amount, paymentMethod, referenceNumber, notes } = await request.json();
+        const { userId, adminId, amount, paymentMethod, periodStart, periodEnd, referenceNumber, notes } = await request.json();
 
-        if (!userId || !amount) {
+        if (!userId || !amount || !periodStart || !periodEnd) {
             return NextResponse.json(
                 { error: "Missing required fields" },
                 { status: 400 }
             );
         }
 
-        // Calculate period (1 month from now)
-        const periodStart = new Date();
-        const periodEnd = new Date();
-        periodEnd.setMonth(periodEnd.getMonth() + 1);
+        // Parse period dates
+        const startDate = new Date(periodStart);
+        const endDate = new Date(periodEnd);
 
         // Record the payment
         await db.insert(payments).values({
@@ -37,19 +36,18 @@ export async function POST(request: NextRequest) {
             status: "completed",
             paymentMethod,
             paymentDate: new Date(),
-            periodStart,
-            periodEnd,
+            periodStart: startDate,
+            periodEnd: endDate,
             referenceNumber,
             notes,
             recordedBy: adminId,
         });
 
-        // Update user's next payment due date
-        const nextPaymentDue = new Date(periodEnd);
+        // Update user's next payment due date (same as period end)
         await db
             .update(users)
             .set({
-                nextPaymentDue,
+                nextPaymentDue: endDate,
                 subscriptionStatus: "active", // Activate if suspended
                 updatedAt: new Date(),
             })

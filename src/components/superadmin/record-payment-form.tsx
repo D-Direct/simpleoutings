@@ -26,8 +26,15 @@ interface RecordPaymentFormProps {
 }
 
 export function RecordPaymentForm({ userId, adminId, currentPlan }: RecordPaymentFormProps) {
+  // Calculate default period dates (today to 1 month from today)
+  const today = new Date();
+  const oneMonthLater = new Date();
+  oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+
   const [amount, setAmount] = useState(currentPlan?.priceMonthly.toString() || "");
   const [paymentMethod, setPaymentMethod] = useState("bank_transfer");
+  const [periodStart, setPeriodStart] = useState(today.toISOString().split('T')[0]);
+  const [periodEnd, setPeriodEnd] = useState(oneMonthLater.toISOString().split('T')[0]);
   const [referenceNumber, setReferenceNumber] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,6 +57,8 @@ export function RecordPaymentForm({ userId, adminId, currentPlan }: RecordPaymen
           adminId,
           amount: parseFloat(amount),
           paymentMethod,
+          periodStart,
+          periodEnd,
           referenceNumber,
           notes,
         }),
@@ -106,6 +115,30 @@ export function RecordPaymentForm({ userId, adminId, currentPlan }: RecordPaymen
           </SelectContent>
         </Select>
       </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label>Period Start</Label>
+          <Input
+            type="date"
+            value={periodStart}
+            onChange={(e) => setPeriodStart(e.target.value)}
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <Label>Period End</Label>
+          <Input
+            type="date"
+            value={periodEnd}
+            onChange={(e) => setPeriodEnd(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+      <p className="text-xs text-stone-500 -mt-2">
+        The subscription period this payment covers (next payment due = period end date)
+      </p>
 
       <div className="space-y-2">
         <Label>Reference Number (Optional)</Label>
