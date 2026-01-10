@@ -21,7 +21,7 @@ export default function LoginPage() {
 
     try {
       const supabase = createClient();
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -33,11 +33,22 @@ export default function LoginPage() {
         return;
       }
 
-      toast.success("Welcome back!", {
-        description: "You have successfully logged in.",
-      });
+      // Check if user is a superadmin
+      const isSuperadminResponse = await fetch("/api/superadmin/verify");
+      const { isSuperadmin } = await isSuperadminResponse.json();
 
-      router.push("/app");
+      if (isSuperadmin) {
+        toast.success("Welcome back, Admin!", {
+          description: "Redirecting to superadmin dashboard...",
+        });
+        router.push("/superadmin");
+      } else {
+        toast.success("Welcome back!", {
+          description: "You have successfully logged in.",
+        });
+        router.push("/app");
+      }
+
       router.refresh();
     } catch (error) {
       toast.error("Something went wrong", {
