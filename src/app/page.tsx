@@ -35,7 +35,7 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6 mx-auto text-center">
             <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-stone-100 text-stone-600 mb-8 border border-stone-200">
               <span className="flex h-2 w-2 rounded-full bg-stone-400 mr-2" />
-              Trusted by 50+ local hosts in Ella and Mirissa
+              Stop giving 20% of your hard-earned money to Airbnb. Take control of your bookings.
             </div>
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/tight max-w-4xl mx-auto mb-8">
               Beautiful Websites for <span className="text-stone-500">Sri Lankan Homestays</span>
