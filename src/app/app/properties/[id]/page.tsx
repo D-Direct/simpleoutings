@@ -65,7 +65,6 @@ export default async function EditPropertyPage({
       </header>
 
       <main className="max-w-5xl mx-auto p-8 lg:p-12">
-        {/* @ts-expect-error - Drizzle query includes extra fields that don't affect the component */}
         <AdminContentForm property={propertyData} />
       </main>
     </div>
