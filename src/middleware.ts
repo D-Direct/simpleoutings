@@ -94,6 +94,8 @@ export default async function middleware(req: NextRequest) {
     if (
         hostname === "localhost" ||
         hostname === "simpleoutings.com" ||
+        hostname === "www.simpleoutings.com" ||
+        hostname.includes("simpleoutings.vercel.app") ||
         hostname.includes("192.168.") ||
         hostname === "127.0.0.1"
     ) {
