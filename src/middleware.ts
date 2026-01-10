@@ -23,6 +23,12 @@ export default async function middleware(req: NextRequest) {
 
     // 1. App Domain (Dashboard) - Requires authentication
     if (hostname.startsWith("app.")) {
+        // Allow superadmin routes to pass through without tenant auth check
+        if (path.startsWith("/superadmin")) {
+            console.log(`[Middleware] Superadmin route - Passing through`);
+            return NextResponse.next();
+        }
+
         // Check authentication for app subdomain
         let supabaseResponse = NextResponse.next({ request: req });
 
