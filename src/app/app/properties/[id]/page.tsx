@@ -58,7 +58,7 @@ export default async function EditPropertyPage({
            <span className="font-bold tracking-tight text-lg">Edit Website</span>
         </div>
         <div className="flex items-center gap-4">
-           <Link href={`http://${propertyData.slug}.localhost:3000`} target="_blank" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors">
+           <Link href={process.env.NODE_ENV === 'production' ? `https://${propertyData.slug}.simpleoutings.com` : `http://${propertyData.slug}.localhost:3000`} target="_blank" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors">
               View Site
            </Link>
         </div>

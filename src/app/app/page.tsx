@@ -73,7 +73,7 @@ export default async function DashboardPage() {
                   
                   <div className="flex gap-3">
                     <Button variant="outline" className="flex-1 rounded-xl border-stone-200 hover:bg-stone-50 h-11" asChild>
-                      <Link href={`http://${prop.slug}.localhost:3000`} target="_blank">
+                      <Link href={process.env.NODE_ENV === 'production' ? `https://${prop.slug}.simpleoutings.com` : `http://${prop.slug}.localhost:3000`} target="_blank">
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Visit
                       </Link>
