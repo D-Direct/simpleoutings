@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsx:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd error handling to superadmin auth and verification script\n\nError Handling:\n- Added try-catch blocks in requireSuperadmin\\(\\) and getSuperadmin\\(\\)\n- Prevents server crashes when Superadmin table doesn''t exist\n- Logs errors to console for debugging\n- Gracefully redirects to login on errors\n\nVerification Script:\n- Created scripts/verify-superadmin-table.ts to check if tables exist\n- Verifies Superadmin, SubscriptionPlan, and Payment tables\n- Checks if User table has new subscription columns\n- Useful for debugging production database issues\n\nThis fixes the \"server-side exception\" error when logging in\nbefore the Superadmin table exists in the database.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
+    ]
+  }
+}
