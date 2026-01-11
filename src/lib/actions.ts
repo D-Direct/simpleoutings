@@ -129,6 +129,9 @@ export async function updateProperty(prevState: ActionState, formData: FormData)
         const phone = formData.get("phone") as string;
         const email = formData.get("email") as string;
         const footerBio = formData.get("footerBio") as string;
+        const connectTitle = formData.get("connectTitle") as string;
+        const connectDescription = formData.get("connectDescription") as string;
+        const locationAddress = formData.get("locationAddress") as string;
 
         if (name) data.name = name;
         if (description !== null) data.description = description || null;
@@ -140,6 +143,9 @@ export async function updateProperty(prevState: ActionState, formData: FormData)
         if (phone !== null) data.phone = phone || null;
         if (email !== null) data.email = email || null;
         if (footerBio !== null) data.footerBio = footerBio || null;
+        if (connectTitle !== null) data.connectTitle = connectTitle || null;
+        if (connectDescription !== null) data.connectDescription = connectDescription || null;
+        if (locationAddress !== null) data.locationAddress = locationAddress || null;
 
         // Only update image fields if new images were uploaded
         if (logoUrl) {

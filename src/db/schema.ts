@@ -82,6 +82,15 @@ export const properties = pgTable("Property", {
     footerBio: text("footerBio"),
     socialLinks: jsonb("socialLinks"), // { facebook: string, instagram: string, x: string }
 
+    // Connect Section (on contact page)
+    connectTitle: text("connectTitle"),
+    connectDescription: text("connectDescription"),
+
+    // Location for Google Maps
+    locationAddress: text("locationAddress"), // Full address for Google Maps
+    latitude: doublePrecision("latitude"),
+    longitude: doublePrecision("longitude"),
+
     logo: text("logo"),
     images: text("images").array(),
     ownerId: text("ownerId").notNull().references(() => users.id),

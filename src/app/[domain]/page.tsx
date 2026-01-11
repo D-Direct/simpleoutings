@@ -87,6 +87,9 @@ export default async function TenantPage({
         propertyEmail={property.email}
         propertyPhone={property.phone}
         propertyAddress={property.address}
+        connectTitle={property.connectTitle}
+        connectDescription={property.connectDescription}
+        locationAddress={property.locationAddress}
       />
 
       <footer className="py-20 border-t border-stone-200 bg-white">

@@ -34,6 +34,11 @@ interface AdminContentFormProps {
     phone: string | null;
     email: string | null;
     footerBio: string | null;
+    connectTitle: string | null;
+    connectDescription: string | null;
+    locationAddress: string | null;
+    latitude: number | null;
+    longitude: number | null;
     amenities: Array<{
       id: string;
       name: string;
@@ -115,6 +120,9 @@ export function AdminContentForm({ property }: AdminContentFormProps) {
     aboutTitle: property.aboutTitle || "",
     aboutContent: property.aboutContent || "",
     footerBio: property.footerBio || "",
+    connectTitle: property.connectTitle || "",
+    connectDescription: property.connectDescription || "",
+    locationAddress: property.locationAddress || "",
   });
 
   // Save active tab to localStorage whenever it changes
@@ -138,6 +146,9 @@ export function AdminContentForm({ property }: AdminContentFormProps) {
       aboutTitle: property.aboutTitle || "",
       aboutContent: property.aboutContent || "",
       footerBio: property.footerBio || "",
+      connectTitle: property.connectTitle || "",
+      connectDescription: property.connectDescription || "",
+      locationAddress: property.locationAddress || "",
     });
   }, [property]);
 
@@ -435,26 +446,78 @@ export function AdminContentForm({ property }: AdminContentFormProps) {
           </TabsContent>
 
           <TabsContent value="social">
-            <Card className="border-stone-200">
-              <CardHeader>
-                <CardTitle className="font-serif">Footer & Social</CardTitle>
-                <CardDescription>Social media links and footer bio.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="footerBio">Short Footer Bio</Label>
-                  <Textarea 
-                    id="footerBio" 
-                    name="footerBio" 
-                    value={formData.footerBio} 
-                    onChange={handleChange}
-                    rows={3} 
-                    placeholder="A short 2-3 sentence bio for the footer." 
-                  />
-                </div>
-                <p className="text-sm text-stone-500 italic">Social links coming soon in next update...</p>
-              </CardContent>
-            </Card>
+            <div className="space-y-6">
+              <Card className="border-stone-200">
+                <CardHeader>
+                  <CardTitle className="font-serif">Contact Section</CardTitle>
+                  <CardDescription>Customize the text in the contact/inquiry section.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="connectTitle">Contact Headline</Label>
+                    <Input
+                      id="connectTitle"
+                      name="connectTitle"
+                      value={formData.connectTitle}
+                      onChange={handleChange}
+                      placeholder="e.g. Plan Your Escape"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="connectDescription">Contact Description</Label>
+                    <Textarea
+                      id="connectDescription"
+                      name="connectDescription"
+                      value={formData.connectDescription}
+                      onChange={handleChange}
+                      rows={3}
+                      placeholder="e.g. Whether you have a specific request or just want to say hello, we'd love to hear from you."
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-stone-200">
+                <CardHeader>
+                  <CardTitle className="font-serif">Location & Map</CardTitle>
+                  <CardDescription>Add your property location to display a map on the contact section.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="locationAddress">Full Address for Google Maps</Label>
+                    <Textarea
+                      id="locationAddress"
+                      name="locationAddress"
+                      value={formData.locationAddress}
+                      onChange={handleChange}
+                      rows={2}
+                      placeholder="e.g. 123 Hill Street, Kandy 20000, Sri Lanka"
+                    />
+                    <p className="text-xs text-stone-500">This address will be used to display your property on Google Maps. Be as specific as possible.</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-stone-200">
+                <CardHeader>
+                  <CardTitle className="font-serif">Footer Bio</CardTitle>
+                  <CardDescription>Short bio that appears in the website footer.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="footerBio">Footer Bio</Label>
+                    <Textarea
+                      id="footerBio"
+                      name="footerBio"
+                      value={formData.footerBio}
+                      onChange={handleChange}
+                      rows={3}
+                      placeholder="A short 2-3 sentence bio for the footer."
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </form>
 

@@ -9,15 +9,27 @@ import { toast } from "sonner";
 import { useEffect, useRef } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { createInquiry } from "@/lib/inquiry-actions";
+import GoogleMap from "./GoogleMap";
 
 interface ContactFormProps {
   propertyId: string;
   propertyEmail?: string | null;
   propertyPhone?: string | null;
   propertyAddress?: string | null;
+  connectTitle?: string | null;
+  connectDescription?: string | null;
+  locationAddress?: string | null;
 }
 
-export default function ContactForm({ propertyId, propertyEmail, propertyPhone, propertyAddress }: ContactFormProps) {
+export default function ContactForm({
+  propertyId,
+  propertyEmail,
+  propertyPhone,
+  propertyAddress,
+  connectTitle,
+  connectDescription,
+  locationAddress
+}: ContactFormProps) {
   const [state, formAction, isPending] = useActionState(createInquiry, { success: false });
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -42,9 +54,11 @@ export default function ContactForm({ propertyId, propertyEmail, propertyPhone, 
           <div className="space-y-12">
             <div>
               <span className="text-xs uppercase tracking-[0.4em] text-stone-400 mb-4 block">Connect</span>
-              <h2 className="text-5xl font-serif text-stone-900 mb-8">Plan Your Escape</h2>
+              <h2 className="text-5xl font-serif text-stone-900 mb-8">
+                {connectTitle || "Plan Your Escape"}
+              </h2>
               <p className="text-stone-600 text-lg font-light leading-relaxed max-w-lg">
-                Whether you have a specific request or just want to say hello, we&apos;d love to hear from you.
+                {connectDescription || "Whether you have a specific request or just want to say hello, we'd love to hear from you."}
               </p>
             </div>
 
@@ -85,6 +99,13 @@ export default function ContactForm({ propertyId, propertyEmail, propertyPhone, 
                 </div>
               )}
             </div>
+
+            {/* Google Map */}
+            {locationAddress && (
+              <div className="pt-8">
+                <GoogleMap address={locationAddress} />
+              </div>
+            )}
           </div>
 
           {/* Form Side */}
