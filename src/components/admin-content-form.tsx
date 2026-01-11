@@ -33,6 +33,7 @@ interface AdminContentFormProps {
     address: string | null;
     phone: string | null;
     email: string | null;
+    whatsappNumber: string | null;
     footerBio: string | null;
     connectTitle: string | null;
     connectDescription: string | null;
@@ -115,6 +116,7 @@ export function AdminContentForm({ property }: AdminContentFormProps) {
     email: property.email || "",
     phone: property.phone || "",
     address: property.address || "",
+    whatsappNumber: property.whatsappNumber || "",
     heroTitle: property.heroTitle || "",
     heroSubtitle: property.heroSubtitle || "",
     aboutTitle: property.aboutTitle || "",
@@ -141,6 +143,7 @@ export function AdminContentForm({ property }: AdminContentFormProps) {
       email: property.email || "",
       phone: property.phone || "",
       address: property.address || "",
+      whatsappNumber: property.whatsappNumber || "",
       heroTitle: property.heroTitle || "",
       heroSubtitle: property.heroSubtitle || "",
       aboutTitle: property.aboutTitle || "",
@@ -321,6 +324,18 @@ export function AdminContentForm({ property }: AdminContentFormProps) {
                       placeholder="+94 77 123 4567"
                     />
                   </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="whatsappNumber">WhatsApp Number (with country code)</Label>
+                  <Input
+                    id="whatsappNumber"
+                    name="whatsappNumber"
+                    type="tel"
+                    value={formData.whatsappNumber}
+                    onChange={handleChange}
+                    placeholder="94771234567"
+                  />
+                  <p className="text-xs text-stone-500">Format: Country code + number without + or spaces (e.g., 94771234567 for Sri Lanka)</p>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="address">Physical Address</Label>

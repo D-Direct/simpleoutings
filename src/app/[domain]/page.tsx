@@ -11,6 +11,7 @@ import GallerySection from "@/components/tenant/GallerySection";
 import RoomGallery from "@/components/tenant/RoomGallery";
 import BookingForm from "@/components/tenant/BookingForm";
 import ContactForm from "@/components/tenant/ContactForm";
+import WhatsAppFloatingButton from "@/components/tenant/WhatsAppFloatingButton";
 
 export async function generateMetadata({
   params,
@@ -58,6 +59,14 @@ export default async function TenantPage({
     <main id="top" className="min-h-screen bg-stone-50 font-sans selection:bg-stone-200 selection:text-stone-900">
       <Header propertyName={property.name} logo={property.logo} />
 
+      {/* WhatsApp Floating Button */}
+      {property.whatsappNumber && (
+        <WhatsAppFloatingButton
+          phoneNumber={property.whatsappNumber}
+          propertyName={property.name}
+        />
+      )}
+
       <HeroSection
         name={property.name}
         description={property.description}
@@ -87,6 +96,8 @@ export default async function TenantPage({
         propertyEmail={property.email}
         propertyPhone={property.phone}
         propertyAddress={property.address}
+        whatsappNumber={property.whatsappNumber}
+        propertyName={property.name}
         connectTitle={property.connectTitle}
         connectDescription={property.connectDescription}
         locationAddress={property.locationAddress}

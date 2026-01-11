@@ -128,6 +128,7 @@ export async function updateProperty(prevState: ActionState, formData: FormData)
         const address = formData.get("address") as string;
         const phone = formData.get("phone") as string;
         const email = formData.get("email") as string;
+        const whatsappNumber = formData.get("whatsappNumber") as string;
         const footerBio = formData.get("footerBio") as string;
         const connectTitle = formData.get("connectTitle") as string;
         const connectDescription = formData.get("connectDescription") as string;
@@ -142,6 +143,7 @@ export async function updateProperty(prevState: ActionState, formData: FormData)
         if (address !== null) data.address = address || null;
         if (phone !== null) data.phone = phone || null;
         if (email !== null) data.email = email || null;
+        if (whatsappNumber !== null) data.whatsappNumber = whatsappNumber || null;
         if (footerBio !== null) data.footerBio = footerBio || null;
         if (connectTitle !== null) data.connectTitle = connectTitle || null;
         if (connectDescription !== null) data.connectDescription = connectDescription || null;

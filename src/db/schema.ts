@@ -79,6 +79,7 @@ export const properties = pgTable("Property", {
     address: text("address"),
     phone: text("phone"),
     email: text("email"),
+    whatsappNumber: text("whatsappNumber"), // WhatsApp number with country code (e.g., "94771234567")
     footerBio: text("footerBio"),
     socialLinks: jsonb("socialLinks"), // { facebook: string, instagram: string, x: string }
 

@@ -10,12 +10,15 @@ import { useEffect, useRef } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { createInquiry } from "@/lib/inquiry-actions";
 import GoogleMap from "./GoogleMap";
+import WhatsAppButton from "./WhatsAppButton";
 
 interface ContactFormProps {
   propertyId: string;
   propertyEmail?: string | null;
   propertyPhone?: string | null;
   propertyAddress?: string | null;
+  whatsappNumber?: string | null;
+  propertyName?: string;
   connectTitle?: string | null;
   connectDescription?: string | null;
   locationAddress?: string | null;
@@ -26,6 +29,8 @@ export default function ContactForm({
   propertyEmail,
   propertyPhone,
   propertyAddress,
+  whatsappNumber,
+  propertyName,
   connectTitle,
   connectDescription,
   locationAddress
@@ -167,6 +172,19 @@ export default function ContactForm({
               >
                 {isPending ? "Sending..." : "Send Inquiry"}
               </Button>
+
+              {/* WhatsApp Alternative */}
+              {whatsappNumber && (
+                <div className="mt-6 text-center">
+                  <p className="text-xs uppercase tracking-widest text-stone-400 mb-3">Or chat directly</p>
+                  <WhatsAppButton
+                    phoneNumber={whatsappNumber}
+                    propertyName={propertyName}
+                    size="lg"
+                    className="w-full h-14 rounded-none uppercase tracking-[0.3em] text-xs"
+                  />
+                </div>
+              )}
             </form>
           </div>
         </div>
