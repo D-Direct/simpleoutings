@@ -50,9 +50,9 @@ export default function ContactForm({
     <section id="contact" className="py-12 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-[0.4em] text-stone-400 mb-4 block">Connect</span>
-          <h2 className="text-5xl font-serif text-stone-900 mb-8">
+          <h2 className="text-5xl font-serif text-stone-900 mb-6">
             {connectTitle || "Plan Your Escape"}
           </h2>
           <p className="text-stone-600 text-lg font-light leading-relaxed max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ export default function ContactForm({
         </div>
 
         {/* Contact Info Section */}
-        <div className="flex flex-wrap justify-center gap-8 mb-16 pb-16 border-b border-stone-100">
+        <div className="flex flex-wrap justify-center gap-8 mb-12 pb-12 border-b border-stone-100">
           {propertyAddress && (
             <div className="flex gap-4 items-start">
               <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
@@ -100,10 +100,10 @@ export default function ContactForm({
         </div>
 
         {/* Two Column Layout: Map & Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           {/* Left Column - Google Map */}
           {locationAddress ? (
-            <div>
+            <div className="h-full min-h-[500px]">
               <GoogleMap address={locationAddress} />
             </div>
           ) : (
@@ -111,7 +111,7 @@ export default function ContactForm({
           )}
 
           {/* Right Column - Contact Form */}
-          <div className="bg-stone-50 p-10 lg:p-16 border border-stone-100">
+          <div className="bg-stone-50 p-10 lg:p-16 border border-stone-100 h-full">
             <form ref={formRef} action={formAction} className="space-y-8">
               <input type="hidden" name="propertyId" value={propertyId} />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

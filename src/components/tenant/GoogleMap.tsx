@@ -12,7 +12,7 @@ export default function GoogleMap({ address }: GoogleMapProps) {
   const mapUrl = `https://www.google.com/maps?q=${encodedAddress}&output=embed`;
 
   return (
-    <div className="w-full h-[400px] rounded-lg overflow-hidden border border-stone-200 shadow-lg">
+    <div className="w-full h-full rounded-lg overflow-hidden border border-stone-200 shadow-lg">
       <iframe
         title="Property Location"
         src={mapUrl}
