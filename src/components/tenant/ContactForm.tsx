@@ -49,66 +49,68 @@ export default function ContactForm({
   return (
     <section id="contact" className="py-12 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-          {/* Info Side */}
-          <div className="space-y-12">
-            <div>
-              <span className="text-xs uppercase tracking-[0.4em] text-stone-400 mb-4 block">Connect</span>
-              <h2 className="text-5xl font-serif text-stone-900 mb-8">
-                {connectTitle || "Plan Your Escape"}
-              </h2>
-              <p className="text-stone-600 text-lg font-light leading-relaxed max-w-lg">
-                {connectDescription || "Whether you have a specific request or just want to say hello, we'd love to hear from you."}
-              </p>
-            </div>
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <span className="text-xs uppercase tracking-[0.4em] text-stone-400 mb-4 block">Connect</span>
+          <h2 className="text-5xl font-serif text-stone-900 mb-8">
+            {connectTitle || "Plan Your Escape"}
+          </h2>
+          <p className="text-stone-600 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+            {connectDescription || "Whether you have a specific request or just want to say hello, we'd love to hear from you."}
+          </p>
+        </div>
 
-            <div className="space-y-8 pt-8 border-t border-stone-100">
-              {propertyAddress && (
-                <div className="flex gap-6 items-start">
-                  <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-stone-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm uppercase tracking-widest text-stone-400 mb-1">Location</h4>
-                    <p className="text-stone-900 font-light">{propertyAddress}</p>
-                  </div>
-                </div>
-              )}
-              
-              {propertyPhone && (
-                <div className="flex gap-6 items-start">
-                  <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-stone-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm uppercase tracking-widest text-stone-400 mb-1">Call Us</h4>
-                    <p className="text-stone-900 font-light">{propertyPhone}</p>
-                  </div>
-                </div>
-              )}
-
-              {propertyEmail && (
-                <div className="flex gap-6 items-start">
-                  <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-stone-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm uppercase tracking-widest text-stone-400 mb-1">Email</h4>
-                    <p className="text-stone-900 font-light">{propertyEmail}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Google Map */}
-            {locationAddress && (
-              <div className="pt-8">
-                <GoogleMap address={locationAddress} />
+        {/* Contact Info Section */}
+        <div className="flex flex-wrap justify-center gap-8 mb-16 pb-16 border-b border-stone-100">
+          {propertyAddress && (
+            <div className="flex gap-4 items-start">
+              <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
+                <MapPin className="w-5 h-5 text-stone-400" />
               </div>
-            )}
-          </div>
+              <div>
+                <h4 className="text-sm uppercase tracking-widest text-stone-400 mb-1">Location</h4>
+                <p className="text-stone-900 font-light">{propertyAddress}</p>
+              </div>
+            </div>
+          )}
 
-          {/* Form Side */}
+          {propertyPhone && (
+            <div className="flex gap-4 items-start">
+              <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
+                <Phone className="w-5 h-5 text-stone-400" />
+              </div>
+              <div>
+                <h4 className="text-sm uppercase tracking-widest text-stone-400 mb-1">Call Us</h4>
+                <p className="text-stone-900 font-light">{propertyPhone}</p>
+              </div>
+            </div>
+          )}
+
+          {propertyEmail && (
+            <div className="flex gap-4 items-start">
+              <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center shrink-0">
+                <Mail className="w-5 h-5 text-stone-400" />
+              </div>
+              <div>
+                <h4 className="text-sm uppercase tracking-widest text-stone-400 mb-1">Email</h4>
+                <p className="text-stone-900 font-light">{propertyEmail}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Two Column Layout: Map & Form */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Google Map */}
+          {locationAddress ? (
+            <div>
+              <GoogleMap address={locationAddress} />
+            </div>
+          ) : (
+            <div className="hidden lg:block"></div>
+          )}
+
+          {/* Right Column - Contact Form */}
           <div className="bg-stone-50 p-10 lg:p-16 border border-stone-100">
             <form ref={formRef} action={formAction} className="space-y-8">
               <input type="hidden" name="propertyId" value={propertyId} />
