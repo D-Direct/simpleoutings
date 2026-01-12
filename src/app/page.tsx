@@ -63,8 +63,8 @@ export default function LandingPage() {
               <Button size="lg" className="bg-white text-stone-900 hover:bg-stone-100 rounded-full h-14 px-10 text-lg shadow-xl" asChild>
                 <Link href="/auth/signup">Start Your Free Website</Link>
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg border-white text-white hover:bg-white/10 backdrop-blur-sm">
-                View Sample Site
+              <Button size="lg" variant="outline" className="rounded-full h-14 px-10 text-lg border-white text-stone-900 bg-white/90 hover:bg-white backdrop-blur-sm" asChild>
+                <Link href="https://blissfulbangalow.simpleoutings.com" target="_blank">View Sample Site</Link>
               </Button>
             </div>
           </div>
