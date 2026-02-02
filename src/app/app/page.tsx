@@ -46,7 +46,7 @@ export default async function DashboardPage() {
             <p className="text-stone-500 text-lg">You have {userProperties.length} active homestay websites.</p>
           </div>
           <Button className="bg-stone-900 text-white hover:bg-stone-800 rounded-full h-12 px-6 shadow-sm" asChild>
-            <Link href="/new">
+            <Link href="/app/new">
               <Plus className="w-4 h-4 mr-2" />
               Launch New Site
             </Link>
@@ -88,7 +88,7 @@ export default async function DashboardPage() {
               </div>
             ))}
             
-            <Link href="/new" className="border-2 border-dashed border-stone-200 rounded-2xl flex flex-col items-center justify-center p-8 bg-stone-50/50 hover:bg-stone-50 transition-colors group cursor-pointer">
+            <Link href="/app/new" className="border-2 border-dashed border-stone-200 rounded-2xl flex flex-col items-center justify-center p-8 bg-stone-50/50 hover:bg-stone-50 transition-colors group cursor-pointer">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
                 <Plus className="w-6 h-6 text-stone-400" />
               </div>

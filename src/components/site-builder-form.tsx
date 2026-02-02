@@ -50,7 +50,7 @@ export function SiteBuilderForm() {
         <Label htmlFor="slug">Subdomain (slug)</Label>
         <div className="flex items-center space-x-2">
           <Input id="slug" name="slug" placeholder="misty-heaven" required />
-          <span className="text-gray-500">.staylaunch.lk</span>
+          <span className="text-gray-500">.simpleoutings.com</span>
         </div>
         <p className="text-xs text-gray-400">This will be your unique website address.</p>
       </div>
