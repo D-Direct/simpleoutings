@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Globe, Layout, Zap, Check } from "lucide-react";
+import { Globe, Layout, Zap, Check, Quote, Phone, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -144,7 +144,7 @@ export default function LandingPage() {
                 <div className="mb-6">
                   <h3 className="text-xl font-bold mb-2">Starter</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">LKR 1,990</span>
+                    <span className="text-4xl font-bold">LKR 990</span>
                     <span className="text-stone-500">/mo</span>
                   </div>
                   <p className="text-stone-500 text-sm mt-2">For individual properties</p>
@@ -176,7 +176,7 @@ export default function LandingPage() {
                 <div className="mb-6">
                   <h3 className="text-xl font-bold mb-2">Pro</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">LKR 4,990</span>
+                    <span className="text-4xl font-bold">LKR 2,490</span>
                     <span className="text-stone-400">/mo</span>
                   </div>
                   <p className="text-stone-400 text-sm mt-2">For growing businesses</p>
@@ -205,7 +205,7 @@ export default function LandingPage() {
                 <div className="mb-6">
                   <h3 className="text-xl font-bold mb-2">Max</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">LKR 9,990</span>
+                    <span className="text-4xl font-bold">LKR 4,990</span>
                     <span className="text-stone-500">/mo</span>
                   </div>
                   <p className="text-stone-500 text-sm mt-2">For property managers</p>
@@ -231,20 +231,96 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* Testimonials Section */}
+        <section className="w-full py-24 md:py-32 border-t border-stone-100">
+          <div className="container px-4 md:px-6 mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4">Loved by Homestay Owners</h2>
+            <p className="text-stone-500 max-w-2xl mx-auto text-lg">See what property owners across Sri Lanka are saying about SimpleOutings.</p>
+          </div>
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="grid gap-8 lg:grid-cols-3 max-w-5xl mx-auto">
+              <div className="p-8 rounded-3xl bg-stone-50 border border-stone-100 relative">
+                <Quote className="h-8 w-8 text-stone-200 absolute top-6 right-6" />
+                <p className="text-stone-600 mb-6 italic leading-relaxed">&quot;Finally, a website that actually works for small homestays. Set mine up in 10 minutes and got my first direct booking within a week!&quot;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-stone-200 rounded-full" />
+                  <div>
+                    <p className="font-semibold text-stone-900">Priya Perera</p>
+                    <p className="text-sm text-stone-500">Ella Guesthouse</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-8 rounded-3xl bg-stone-50 border border-stone-100 relative">
+                <Quote className="h-8 w-8 text-stone-200 absolute top-6 right-6" />
+                <p className="text-stone-600 mb-6 italic leading-relaxed">&quot;I was paying 15-20% commission to booking sites. Now I keep all my earnings and my guests love booking directly through WhatsApp.&quot;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-stone-200 rounded-full" />
+                  <div>
+                    <p className="font-semibold text-stone-900">Kumara Silva</p>
+                    <p className="text-sm text-stone-500">Kandy Hill Villa</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-8 rounded-3xl bg-stone-50 border border-stone-100 relative">
+                <Quote className="h-8 w-8 text-stone-200 absolute top-6 right-6" />
+                <p className="text-stone-600 mb-6 italic leading-relaxed">&quot;The templates look so professional. My guests often comment on how easy it was to find information and make a booking.&quot;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-stone-200 rounded-full" />
+                  <div>
+                    <p className="font-semibold text-stone-900">Anoma Fernando</p>
+                    <p className="text-sm text-stone-500">Mirissa Beach Stay</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
-      <footer className="py-12 px-6 border-t border-stone-100 bg-stone-50 text-stone-500">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center">
-            <Globe className="h-5 w-5 mr-2" />
-            <span className="font-bold text-lg tracking-tighter text-stone-900">SimpleOutings</span>
+      <footer className="py-12 px-6 border-t border-stone-100 bg-stone-900 text-stone-400">
+        <div className="container mx-auto">
+          <div className="grid gap-8 md:grid-cols-4 mb-12">
+            <div>
+              <div className="flex items-center mb-4">
+                <Globe className="h-5 w-5 mr-2 text-white" />
+                <span className="font-bold text-lg tracking-tighter text-white">SimpleOutings</span>
+              </div>
+              <p className="text-sm leading-relaxed">Beautiful websites for Sri Lankan homestays. Launch your property online in minutes.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+              <div className="flex flex-col gap-2 text-sm">
+                <Link className="hover:text-white transition-colors" href="#features">Features</Link>
+                <Link className="hover:text-white transition-colors" href="#pricing">Pricing</Link>
+                <Link className="hover:text-white transition-colors" href="/contact">Contact</Link>
+                <Link className="hover:text-white transition-colors" href="/auth/login">Login</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-white mb-4">Legal</h4>
+              <div className="flex flex-col gap-2 text-sm">
+                <Link className="hover:text-white transition-colors" href="/terms">Terms of Service</Link>
+                <Link className="hover:text-white transition-colors" href="/privacy">Privacy Policy</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-white mb-4">Contact Us</h4>
+              <div className="flex flex-col gap-3 text-sm">
+                <a href="tel:+94777889880" className="flex items-center gap-2 hover:text-white transition-colors">
+                  <Phone className="h-4 w-4" />
+                  +94 777 889 880
+                </a>
+                <a href="mailto:info@simpleoutings.com" className="flex items-center gap-2 hover:text-white transition-colors">
+                  <Mail className="h-4 w-4" />
+                  info@simpleoutings.com
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-8 text-sm">
-            <Link className="hover:text-stone-900 transition-colors" href="#">Terms</Link>
-            <Link className="hover:text-stone-900 transition-colors" href="#">Privacy</Link>
-            <Link className="hover:text-stone-900 transition-colors" href="#">Contact</Link>
+          <div className="border-t border-stone-800 pt-8 text-center text-xs">
+            <p>© {new Date().getFullYear()} SimpleOutings. All rights reserved.</p>
           </div>
-          <p className="text-xs">© {new Date().getFullYear()} SimpleOutings SL. All rights reserved.</p>
         </div>
       </footer>
     </div>
