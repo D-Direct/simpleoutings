@@ -13,7 +13,7 @@ async function verifyTables() {
             );
         `);
 
-        const superadminExists = superadminCheck.rows[0]?.exists;
+        const superadminExists = (superadminCheck as unknown as Array<{exists: boolean}>)[0]?.exists;
 
         console.log(`Superadmin table: ${superadminExists ? '✅ EXISTS' : '❌ MISSING'}`);
 
@@ -25,7 +25,7 @@ async function verifyTables() {
             );
         `);
 
-        const planExists = planCheck.rows[0]?.exists;
+        const planExists = (planCheck as unknown as Array<{exists: boolean}>)[0]?.exists;
 
         console.log(`SubscriptionPlan table: ${planExists ? '✅ EXISTS' : '❌ MISSING'}`);
 
@@ -37,7 +37,7 @@ async function verifyTables() {
             );
         `);
 
-        const paymentExists = paymentCheck.rows[0]?.exists;
+        const paymentExists = (paymentCheck as unknown as Array<{exists: boolean}>)[0]?.exists;
 
         console.log(`Payment table: ${paymentExists ? '✅ EXISTS' : '❌ MISSING'}`);
 
@@ -49,7 +49,7 @@ async function verifyTables() {
             AND column_name IN ('subscriptionStatus', 'subscriptionPlanId', 'nextPaymentDue');
         `);
 
-        const hasNewColumns = userColumnsCheck.rows.length === 3;
+        const hasNewColumns = (userColumnsCheck as unknown as Array<unknown>).length === 3;
 
         console.log(`User table new columns: ${hasNewColumns ? '✅ EXISTS' : '❌ MISSING'}`);
 
@@ -63,11 +63,11 @@ async function verifyTables() {
 
             // Count superadmins
             const adminCount = await db.execute(sql`SELECT COUNT(*) FROM "Superadmin";`);
-            console.log(`\n👤 Superadmins: ${adminCount.rows[0]?.count || 0}`);
+            console.log(`\n👤 Superadmins: ${(adminCount as unknown as Array<{count: string}>)[0]?.count || 0}`);
 
             // Count subscription plans
             const planCount = await db.execute(sql`SELECT COUNT(*) FROM "SubscriptionPlan";`);
-            console.log(`📋 Subscription plans: ${planCount.rows[0]?.count || 0}`);
+            console.log(`📋 Subscription plans: ${(planCount as unknown as Array<{count: string}>)[0]?.count || 0}`);
         }
 
         process.exit(0);
