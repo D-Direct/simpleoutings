@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Globe, Layout, Zap } from "lucide-react";
+import { Globe, Layout, Zap, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -98,6 +98,135 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Custom Domains</h3>
                 <p className="text-stone-500 leading-relaxed font-light">Build trust with a custom .lk or .com domain. Expertly tuned for local and global SEO performance.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="w-full py-24 md:py-32 bg-stone-50 border-t border-stone-100">
+          <div className="container px-4 md:px-6 mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4">Simple, Transparent Pricing</h2>
+            <p className="text-stone-500 max-w-2xl mx-auto text-lg">Choose the plan that fits your business. Start free and upgrade as you grow.</p>
+          </div>
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="grid gap-8 lg:grid-cols-4 max-w-6xl mx-auto">
+              {/* Free Tier */}
+              <div className="p-8 rounded-3xl bg-white border border-stone-200 flex flex-col">
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold mb-2">Free</h3>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold">LKR 0</span>
+                  </div>
+                  <p className="text-stone-500 text-sm mt-2">Forever free</p>
+                </div>
+                <ul className="space-y-3 mb-8 flex-1">
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">Site under subdomain</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">&quot;Built with SimpleOutings&quot; badge</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">Single property</span>
+                  </li>
+                </ul>
+                <Button variant="outline" className="w-full rounded-full" asChild>
+                  <Link href="/auth/signup">Get Started</Link>
+                </Button>
+              </div>
+
+              {/* Starter Tier */}
+              <div className="p-8 rounded-3xl bg-white border border-stone-200 flex flex-col">
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold mb-2">Starter</h3>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold">LKR 1,990</span>
+                    <span className="text-stone-500">/mo</span>
+                  </div>
+                  <p className="text-stone-500 text-sm mt-2">For individual properties</p>
+                </div>
+                <ul className="space-y-3 mb-8 flex-1">
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">Custom domain support</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">No branding badge</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">Single site</span>
+                  </li>
+                </ul>
+                <Button variant="outline" className="w-full rounded-full" asChild>
+                  <Link href="/auth/signup">Get Started</Link>
+                </Button>
+              </div>
+
+              {/* Pro Tier */}
+              <div className="p-8 rounded-3xl bg-stone-900 text-white border border-stone-800 flex flex-col relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-stone-700 text-white text-xs font-medium px-3 py-1 rounded-full">
+                  Popular
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold mb-2">Pro</h3>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold">LKR 4,990</span>
+                    <span className="text-stone-400">/mo</span>
+                  </div>
+                  <p className="text-stone-400 text-sm mt-2">For growing businesses</p>
+                </div>
+                <ul className="space-y-3 mb-8 flex-1">
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-400 shrink-0 mt-0.5" />
+                    <span className="text-stone-300 text-sm">All Starter features</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-400 shrink-0 mt-0.5" />
+                    <span className="text-stone-300 text-sm">Multiple sites under one domain</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-400 shrink-0 mt-0.5" />
+                    <span className="text-stone-300 text-sm">Priority support</span>
+                  </li>
+                </ul>
+                <Button className="w-full rounded-full bg-white text-stone-900 hover:bg-stone-100" asChild>
+                  <Link href="/auth/signup">Get Started</Link>
+                </Button>
+              </div>
+
+              {/* Max Tier */}
+              <div className="p-8 rounded-3xl bg-white border border-stone-200 flex flex-col">
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold mb-2">Max</h3>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold">LKR 9,990</span>
+                    <span className="text-stone-500">/mo</span>
+                  </div>
+                  <p className="text-stone-500 text-sm mt-2">For property managers</p>
+                </div>
+                <ul className="space-y-3 mb-8 flex-1">
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">All Pro features</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">Unlimited sites</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <span className="text-stone-600 text-sm">WhatsApp integration</span>
+                  </li>
+                </ul>
+                <Button variant="outline" className="w-full rounded-full" asChild>
+                  <Link href="/auth/signup">Get Started</Link>
+                </Button>
               </div>
             </div>
           </div>
