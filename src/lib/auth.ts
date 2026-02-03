@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { users, subscriptionPlans } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function getCurrentUser() {
@@ -16,21 +16,49 @@ export async function getCurrentUser() {
     return null;
   }
 
-  // Get or create user in our database
+  // Get or create user in our database (WITH subscription plan)
   let dbUser = await db.query.users.findFirst({
     where: eq(users.email, authUser.email!),
+    with: {
+      subscriptionPlan: true, // Include plan details
+    },
   });
 
   if (!dbUser) {
-    // Create user in our database if they don't exist
-    const [newUser] = await db
-      .insert(users)
-      .values({
-        id: authUser.id,
-        email: authUser.email!,
-      })
-      .returning();
-    dbUser = newUser;
+    try {
+      // Get the Free plan to assign to new users
+      const freePlan = await db.query.subscriptionPlans.findFirst({
+        where: eq(subscriptionPlans.name, "Free"),
+      });
+
+      console.log("Free plan found:", freePlan);
+
+      // Create user in our database with Free plan
+      const [newUser] = await db
+        .insert(users)
+        .values({
+          id: authUser.id,
+          email: authUser.email!,
+          subscriptionPlanId: freePlan?.id,
+          subscriptionStatus: "active",
+          subscriptionStartDate: new Date(),
+        })
+        .returning();
+
+      console.log("New user created:", newUser);
+
+      // Fetch the newly created user WITH subscription plan
+      dbUser = await db.query.users.findFirst({
+        where: eq(users.id, newUser.id),
+        with: {
+          subscriptionPlan: true,
+        },
+      });
+    } catch (error) {
+      console.error("Error creating user:", error);
+      console.error("Error details:", JSON.stringify(error, null, 2));
+      throw error;
+    }
   }
 
   return dbUser;

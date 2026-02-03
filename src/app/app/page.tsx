@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Layout, Plus, ExternalLink, Settings, Home as HomeIcon } from "lucide-react";
 import { requireAuth } from "@/lib/auth";
+import { canCreateProperty } from "@/lib/subscription-helpers";
 import { eq } from "drizzle-orm";
 import { properties } from "@/db/schema";
 import { LogoutButton } from "@/components/LogoutButton";
@@ -16,6 +17,10 @@ export default async function DashboardPage() {
   const userProperties = await db.query.properties.findMany({
     where: eq(properties.ownerId, user.id),
   });
+
+  // Check if user can create more properties
+  const canCreate = canCreateProperty(user, userProperties.length);
+  const reachedLimit = !canCreate;
 
   return (
     <div className="min-h-screen bg-stone-50/50 font-sans text-stone-900">
@@ -40,17 +45,47 @@ export default async function DashboardPage() {
       </header>
 
       <main className="max-w-7xl mx-auto p-8 lg:p-12">
+        {/* Current Plan Indicator */}
+        <div className="mb-6 p-4 bg-white rounded-lg border border-stone-200 shadow-sm">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-sm font-medium text-stone-900 mb-1">
+                Current Plan: <span className="font-bold">{user.subscriptionPlan?.name || 'No Plan'}</span>
+              </h2>
+              <p className="text-xs text-stone-500">
+                {userProperties.length} / {user.subscriptionPlan?.maxProperties || 0} sites used
+                {reachedLimit && <span className="text-amber-600 font-medium ml-2">• Limit reached</span>}
+              </p>
+            </div>
+            <Button variant="outline" className="rounded-full text-sm h-9 px-5" asChild>
+              <Link href="/app/upgrade">Upgrade Plan</Link>
+            </Button>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">Welcome Back</h1>
             <p className="text-stone-500 text-lg">You have {userProperties.length} active homestay websites.</p>
           </div>
-          <Button className="bg-stone-900 text-white hover:bg-stone-800 rounded-full h-12 px-6 shadow-sm" asChild>
-            <Link href="/app/new">
-              <Plus className="w-4 h-4 mr-2" />
-              Launch New Site
-            </Link>
-          </Button>
+          {reachedLimit ? (
+            <div className="text-right">
+              <p className="text-sm text-stone-500 mb-2">
+                You've reached your plan limit
+              </p>
+              <Button disabled className="bg-stone-300 text-white rounded-full h-12 px-6">
+                <Plus className="w-4 h-4 mr-2" />
+                Launch New Site
+              </Button>
+            </div>
+          ) : (
+            <Button className="bg-stone-900 text-white hover:bg-stone-800 rounded-full h-12 px-6 shadow-sm" asChild>
+              <Link href="/app/new">
+                <Plus className="w-4 h-4 mr-2" />
+                Launch New Site
+              </Link>
+            </Button>
+          )}
         </div>
 
         {userProperties.length > 0 ? (
@@ -87,13 +122,15 @@ export default async function DashboardPage() {
                 </div>
               </div>
             ))}
-            
-            <Link href="/app/new" className="border-2 border-dashed border-stone-200 rounded-2xl flex flex-col items-center justify-center p-8 bg-stone-50/50 hover:bg-stone-50 transition-colors group cursor-pointer">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
-                <Plus className="w-6 h-6 text-stone-400" />
-              </div>
-              <p className="text-stone-500 font-medium">Add another property</p>
-            </Link>
+
+            {!reachedLimit && (
+              <Link href="/app/new" className="border-2 border-dashed border-stone-200 rounded-2xl flex flex-col items-center justify-center p-8 bg-stone-50/50 hover:bg-stone-50 transition-colors group cursor-pointer">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                  <Plus className="w-6 h-6 text-stone-400" />
+                </div>
+                <p className="text-stone-500 font-medium">Add another property</p>
+              </Link>
+            )}
           </div>
         ) : (
           <div className="bg-white border border-stone-200 rounded-3xl p-12 lg:p-20 text-center max-w-2xl mx-auto shadow-sm">

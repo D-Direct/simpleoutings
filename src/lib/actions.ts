@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAuth } from "./auth";
+import { canCreateProperty } from "./subscription-helpers";
 
 export type ActionState = {
     error?: string;
@@ -25,7 +26,20 @@ export async function createProperty(prevState: ActionState, formData: FormData)
         // Get authenticated user
         const user = await requireAuth();
 
-        // 1. Check if slug is taken
+        // 1. Check tier limit - count existing properties
+        const existingProperties = await db.query.properties.findMany({
+            where: eq(properties.ownerId, user.id),
+        });
+
+        // Validate against tier limit
+        if (!canCreateProperty(user, existingProperties.length)) {
+            return {
+                error: `Your ${user.subscriptionPlan?.name || 'current'} plan allows ${user.subscriptionPlan?.maxProperties || 0} site(s). Upgrade to create more.`,
+                success: false
+            };
+        }
+
+        // 2. Check if slug is taken
         const existing = await db.query.properties.findFirst({
             where: eq(properties.slug, slug),
         });
@@ -34,7 +48,7 @@ export async function createProperty(prevState: ActionState, formData: FormData)
             return { error: "Subdomain is already taken.", success: false };
         }
 
-        // 2. Create Property
+        // 3. Create Property
         await db.insert(properties).values({
             name,
             description,

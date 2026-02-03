@@ -7,53 +7,54 @@ async function seedSubscriptionPlans() {
     try {
         const plans = await db.insert(subscriptionPlans).values([
             {
-                name: "Basic",
-                description: "Perfect for small homestays getting started",
-                priceMonthly: 2500, // LKR
+                name: "Free",
+                description: "Forever free",
+                priceMonthly: 0, // LKR
                 currency: "LKR",
                 maxProperties: 1,
                 features: JSON.parse(JSON.stringify([
-                    "1 Property Website",
-                    "Unlimited Rooms",
-                    "Booking Management",
-                    "Contact Forms",
-                    "Email Notifications",
-                    "Image Gallery",
-                    "Mobile Responsive"
+                    "Site under subdomain",
+                    "\"Built with SimpleOutings\" badge",
+                    "Single property"
+                ])),
+                isActive: true,
+            },
+            {
+                name: "Starter",
+                description: "For individual properties",
+                priceMonthly: 1240, // LKR
+                currency: "LKR",
+                maxProperties: 1,
+                features: JSON.parse(JSON.stringify([
+                    "Custom domain support",
+                    "No branding badge",
+                    "Single site"
                 ])),
                 isActive: true,
             },
             {
                 name: "Pro",
-                description: "For growing businesses with multiple properties",
-                priceMonthly: 5000, // LKR
+                description: "For growing businesses",
+                priceMonthly: 2490, // LKR
                 currency: "LKR",
-                maxProperties: 3,
+                maxProperties: 999, // Multiple sites
                 features: JSON.parse(JSON.stringify([
-                    "Up to 3 Property Websites",
-                    "Unlimited Rooms",
-                    "Priority Support",
-                    "Custom Domain Support",
-                    "Advanced Analytics",
-                    "Custom Branding",
-                    "All Basic Features"
+                    "All Starter features",
+                    "Multiple sites under one domain",
+                    "Priority support"
                 ])),
                 isActive: true,
             },
             {
-                name: "Enterprise",
-                description: "For large hotel chains and property managers",
-                priceMonthly: 10000, // LKR
+                name: "Max",
+                description: "For property managers",
+                priceMonthly: 4990, // LKR
                 currency: "LKR",
-                maxProperties: 999,
+                maxProperties: 999, // Unlimited
                 features: JSON.parse(JSON.stringify([
-                    "Unlimited Properties",
-                    "Dedicated Account Manager",
-                    "White Label Solution",
-                    "API Access",
-                    "Custom Integrations",
-                    "24/7 Premium Support",
-                    "All Pro Features"
+                    "All Pro features",
+                    "Unlimited sites",
+                    "WhatsApp integration"
                 ])),
                 isActive: true,
             },

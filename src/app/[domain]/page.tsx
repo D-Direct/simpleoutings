@@ -12,6 +12,7 @@ import RoomGallery from "@/components/tenant/RoomGallery";
 import BookingForm from "@/components/tenant/BookingForm";
 import ContactForm from "@/components/tenant/ContactForm";
 import WhatsAppFloatingButton from "@/components/tenant/WhatsAppFloatingButton";
+import { shouldShowBadge } from "@/lib/subscription-helpers";
 
 export async function generateMetadata({
   params,
@@ -48,12 +49,22 @@ export default async function TenantPage({
       amenities: true,
       testimonials: true,
       galleryImages: true,
+      owner: {
+        with: {
+          subscriptionPlan: true,
+        },
+      },
     }
   });
 
   if (!property) {
     return notFound();
   }
+
+  // Debug: Log subscription plan info
+  console.log("Property owner:", property.owner?.email);
+  console.log("Subscription plan:", property.owner?.subscriptionPlan);
+  console.log("Should show badge:", shouldShowBadge(property.owner?.subscriptionPlan || null));
 
   return (
     <main id="top" className="min-h-screen bg-stone-50 font-sans selection:bg-stone-200 selection:text-stone-900">
@@ -116,9 +127,16 @@ export default async function TenantPage({
               <p className="text-stone-400 text-sm font-light">
                 © {new Date().getFullYear()} {property.name}.
               </p>
-              <p className="text-stone-300 text-[10px] uppercase tracking-widest mt-2">
-                Built with SimpleOutings
-              </p>
+              {shouldShowBadge(property.owner?.subscriptionPlan || null) && (
+                <a
+                  href="https://simpleoutings.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-stone-900 text-sm font-medium uppercase tracking-wide mt-3 inline-block hover:text-stone-600 transition-colors cursor-pointer"
+                >
+                  Built with SimpleOutings
+                </a>
+              )}
             </div>
           </div>
         </div>

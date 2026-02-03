@@ -144,7 +144,7 @@ export default function LandingPage() {
                 <div className="mb-6">
                   <h3 className="text-xl font-bold mb-2">Starter</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">LKR 990</span>
+                    <span className="text-4xl font-bold">LKR 1,240</span>
                     <span className="text-stone-500">/mo</span>
                   </div>
                   <p className="text-stone-500 text-sm mt-2">For individual properties</p>
